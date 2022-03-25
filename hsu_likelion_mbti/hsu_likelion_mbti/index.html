@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dis/web/static/pretendard-dynamic-subset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="desktop" onload = "init()">
+    <div class = "wrapper1">
+        <div class = "wrapper2">
+    <article class="start">
+        <div class="hsu-logo-box" ><img src="image/hsu_logo.png" class = "hsu-logo-image"></div>
+        <div class="title1">나와 닮은</div>
+        <div class="title2">
+            상상부기 프렌즈<span class="text-style-1">는?</span>
+        </div>
+        <div class="subtitle1">
+            #상상부기 #한성냥이 #꼬꼬꾸꾸 # 상찌
+        </div>
+        <div class = "start-image-box"><img src="image/start_img.png" class="start-img"></div>
+        <div class="detail">
+            <span class="text-style-1">한성대학교 멋쟁이사자처럼 10기</span>
+            운영진들과<br>
+            기획/디자인팀이 제작한 유형테스트 입니다.<br>
+            많은 참여와 공유 부탁드립니다!
+        </div>
+
+        <div class ="button-box"><button type="button" class="first_button" onclick='start();'><div class="text">테스트 시작하기</div></button><br></div>
+        
+        <div class = "share_text">
+            공유하기
+        </div>
+        <div class = "share-image-box">
+            <img class = "insta" src = "image/insta.png">
+            <img class = "kakao" src = "image/kakao.png">
+            <img class = "linkcopy" src = "image/linkcopy.png">
+        </div>
+        </article>
+    </div>
+
+    <div class = "wrapper2">
+    <article class="question">
+        <div class = "title1">나와 닮은</div>
+        <div class = "title2">상상부기 프렌즈는?</div>
+        <div class = "progress-number">1/20</div>
+
+        <div id="myProgress">
+            <div id="myBar"><div class = "progress-bar-image"></div></div>
+          </div>
+
+        <div class="problem">문제</div>
+
+        <input id="type" type="hidden" value="EI">
+
+        <button id="A" type="button" class="answer-button"><span class = "answer-content">content</span></button>
+        <button id="B" type="button" class="answer-button"><span class = "answer-content">content</span></button>
+    </article>
+    </div>
+
+
+
+    <article class="result">
+        <h2 id="title" class="text-center mt-5">동물이름</h2>
+        <h3 id="explain" class="text-center mt-5">설명</h3>
+        <h2>최고의 궁합</h2>
+        <img id="image-mbti-best" class="image-mbti" src="" alt="animal">
+        <h2>최악의 궁합</h2>
+        <img id="image-mbti-worst" class="image-mbti" src="" alt="animal">
+
+    </article>
+
+    <div class="wrapper2">
+        <footer class = "copyright">
+            <img class = "copyright-logo" src = "image/copyright_logo.png"></div>
+        </footer>
+    </div>
+
+</div>
+    <input type="hidden" type="text" id="EI" value="0">
+    <input type="hidden" type="text" id="SN" value="0">
+    <input type="hidden" type="text" id="TF" value="0">
+    <input type="hidden" type="text" id="JP" value="0">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var num = 1; //몇 번 문제
+
+        var q = {
+            1: {"tilte": "친구를 만나러 나가려던 참에 급한일이 생겨 못만날 것 같다고 연락이 왔다. 당신의 반응은?", "type": "EI", "A": "딴 애들 연락 돌려봐야겠다", "B": "오히려 좋아 밀린 드라마 정주행해야지"},
+            2: {"title": "팀플을 같이하게 된 친구들과 친해지려 상상파크에 갔다. 이때 당신은? ", "type": "EI", "A": "새로운 대화의 주제를 꺼내면서 열심히 질문한다.", "B": "친구들의 질문에 열심히 대답한다."},
+            3: {"title": "동기들과 학교 앞 방목 1호점에 고기를 먹으러왔다! 이때 당신은?", "type": "EI", "A": "사장님~ 저희 삼겹 목살 반반이요!", "B": "친구가 대신 주문한다."},
+            4: {"title": "같이 밥을 먹기로 한 친구들의 수업이 늦게 끝나게 되어 혼자 밥을 먹게 되었다.", "type": "EI", "A": "혼밥은 역시 학식당이지. 소금구이 덮밥 있으면 좋겠당ㅎㅎ", "B": "좀만 참았다가 집가서 먹어야겠다!"},
+            5: {"title": "수업 내용이 너무 어려워 우울해진 당신.", "type": "EI", "A": "친구들에게 말한다. \"오늘 너무 힘들다.. 와글즈.. 고?\"", "B": "친구들에게 말한다. \"얘들아 나 너무 기빨려.. 빨리 집가서 좀 쉬어야겠다..\" "},
+            6: { "title": "오랜만에 대면수업을 하러 학교에 왔다! 어, 공학관이 어디더라?", "type": "SN", "A": "공학관 갈 때마다 숨이 찼던 기억이.. 저 언덕 위에 있을듯!", "B": "뭐 학교도 오랜만에 온김에 산책이나 할겸 다 둘러보면서 찾아야겠다~!" },
+            7: { "title": "CC인 연인과 상상관 12층에서 노을을 보기로 했는데, 지하철을 반대로 타 늦는다고 한다. 이때 당신은? ", "type": "SN", "A": "음 그럴 수 있지 밤 야경도 좋아", "B":  " 아니 어떻게 그럴수가 있지..? 좀 더 신경 썼으면 이럴 일 없었을텐데.." },
+            8: { "title": "한성대에 들어온 당신 ! 한성대 마스코트인 상상부기가 반겨주고 있다 이때 당신이 드는 생각은 ?", "type": "SN", "A": "귀엽다, 거북이다, 동그랗다, 파랗다, 누가 만들었지, 성별이 뭐지", "B": "이름이 왜 상상부기지?, 뽀로로랑 친할 것 같다, 아 거북이랑 펭귄이랑은 안친해지나?" },
+            9: { "title": "상상빌리지에 살고있는 당신! 오늘은 B1 조리실에 가서 떡볶이 만들기에 도전해볼것이다!", "type": "SN", "A": "백종원님의 떡볶이 레시피 검색! 아 근데 재료가 하나 없네.. 담에 만들어야겠다.. ", "B": "저번에 백종원님 티비 프로에서 어떻게 하는지 다 봐놨지!! 음 설탕이 없네 대신 꿀 넣어야겠당" },
+            10: { "title": "친구들과 유형테스트 만들기 프로젝트를 하려고 한다. 오늘은 첫 회의 시간. 뭐부터 정해야하지 ?", "type": "SN", "A": "지금 눈 앞에 있는 세세한 것들부터 정할래 !", "B": "세세한 것 보다는 큰 틀을 먼저 잡자 !" },
+            11: { "title": "수업이 시작된지 10분이 지났는데도 친구가 오지 않는다. 카톡을 해봤더니 몸이 안좋다며 코로나일 것 같다는 답장이 왔다", "type": "TF", "A": "자가키트 해봤어? 교수님한테 말씀부터 드려! 결석처리 될라 ㅠㅠ", "B": "몸 많이 안좋아 ..? 코로나 아니었음 좋겠다.. 일단 수업 걱정하지말구 푹 쉬어. 수업은 걱정마 내꺼 필기 보여줄게! " },
+            12: { "title": "친구가 오래 사귀던 애인과 헤어져서 많이 힘들어 한다. 이때 당신은??", "type": "TF", "A": "아이고.. 괜찮아..? 시간 좀 지나면 괜찮아질걸거야..! 시간이 약이래잖어..", "B": "고생했어 그동안. 너무 힘들어하지마. 너가 최고야. 힘내자!!" },
+            13: { "title": "친구가 힘겨운 통학을 끝내고 자취를 시작했다고 한다. 이때 당신은?", "type": "TF", "A": "아싸 앞으로 술 마시면 너네 집에서 자면 되겠다! 집들이 날부터 잡아~", "B": "와 진짜?드디어!!! 집들이 선물 갖고싶은거 있어? 자취도 이것저것 신경쓸거 많다던데 화팅ㅠㅠ" },
+            14: { "title": "친구가 과제를 하던 중 노트북이 갑자기 꺼져서 과제가 다 날라간 것 같다고 한다. 이때 당신은?", "type": "TF", "A": "갑자기?! 그거 구글링하면 복구하는 법 뜰거야 빨리 그것부터 찾아서 해봐... 어카냐..", "B": "헐???? 빨리 다시 켜봐! 제발 자동 백업 되어 있어라.. 어떡해..... 너 그거 하루종일 했잖아.." },
+            15: { "title": "수업이 끝나고 친구와 함께 나왔다. 급격하게 따듯해진 날씨. 봄이 온듯하다.", "type": "TF", "A": "이러다 또 여름오겠지;;? 하 이번엔 얼마나 더울라나..", "B": "봄냄새 대박이야,, 아,, 설레네,, 가슴이 간질간질,, 벚꽃 언제필까?" },
+            16: { "title": "교수님이 과제를 등록하셨다. 이때 당신은?", "type": "JP", "A": "일요일까지? 일단 플래너에 마감 날짜 적어야겠다. 수요일부터 강의 들어야지. 아 이것도 적어둬야겠다.", "B": "일요일까지라고? 절대 안잊어버려야지. 토욜에 무조건 낸다." },
+            17: { "title": "동기들과 스타동에서 밥을 먹고 와글즈에 가서 술도 먹었다. 오늘 모든 계산을 내가 했다. 집을 가는 동안 당신은? ", "type": "JP", "A": "어우 어지러.. 스타동이랑 와글즈 합치고 6으로 나누면.. 지금 미리 단톡에 보내두고 빨리 자야겠다", "B": "아 피곤하다.. 하 돈계산은.. 내일 해야지.. " },
+            18: { "title": "내일은 연인과 데이트하는 날이다.내일 무엇을 할지 정하는 중이다. 이때 당신은?", "type": "JP", "A": "혜화역에 호호식당이라는 맛집 있으니까 집에서 점심먹고 나와서 거기 옆에 카페에 있다가 호호식당 브레이크 타임 끝나기 10분전에 나가자. ", "B": "혜화역에서 만나자!! 만나서 근처 카페갔다가 호호식당 가는거 어때?" },
+            19: { "title": "힘들지만 재밌었던 농촌 체험활동을 끝내고 드디어 집에 돌아왔다. 짐들이 산더미처럼 쌓여있다.", "type": "JP", "A": "아오 삭신이야.. 짐부터 풀어놔야겠다..", "B": "몰라몰라 피곤해 삭신이 쑤신다.. 일단 자야지.." },
+            20: { "title": "오늘따라 단톡방이 시끌벅적하다. 이때 당신은?", "type": "JP", "A": "바로바로 답장을 보낸다.", "B": "일단 알림을 끄고 자기 전에 확인한다." }
+        }
+
+        var index = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+        var result = {
+            "ESFP": { "title": "노는게 제일 좋아 상상부기", "subtitle" : "동해번쩍 서해번쩍",  "explain": "하마 설명", "img": "image/mbti/esfp.png" },
+            "ESFJ": { "title": "슈퍼핵인싸 상상부기", "subtitle" : "친구 사귀는게 제일 쉬웠어요",  "explain": "하마 설명", "img": "image/mbti/esfj.png" },
+            "ESTP": { "title": "내일은 없어 꼬꼬꾸꾸", "subtitle" : "일단 하고 보자고 !!!",  "explain": "하마 설명", "img": "image/mbti/estp.png" },
+            "ESTJ": { "title": "멋쟁이 워커홀릭 꼬꼬꾸꾸", "subtitle" : "계획은 지키라고 있는거죠",  "explain": "하마 설명", "img": "image/mbti/estj.png" },
+            "ENFP": { "title": "댕댕이 탈을 쓴 상상부기", "subtitle" : "365일 저세상 텐션",  "explain": "하마 설명", "img": "image/mbti/enfp.png" },
+            "ENFJ": { "title": "긍정파워 전도사 상상부기", "subtitle" : "나의 해피바이러스를 받아라 ~!",  "explain": "하마 설명", "img": "image/mbti/enfj.png" },
+            "ENTP": { "title": "노브레이크 꼬꼬꾸꾸", "subtitle" : "빠꾸없는 자유로운 영혼",  "explain": "하마 설명", "img": "image/mbti/entp.png" },
+            "ENTJ": { "title": "조별과제 버스담당 꼬꼬꾸꾸", "subtitle" : "극극극한의 효율쟁이",  "explain": "하마 설명", "img": "image/mbti/entj.png" },
+            "ISFP": { "title": "집돌이 집순이 상찌", "subtitle" : "역시 집이 최고야♡",  "explain": "하마 설명", "img": "image/mbti/isfp.png" },
+            "ISFJ": { "title": "맑은 영혼 한성냥이", "subtitle" : "내가 바로 한성대의 나이팅게일",  "explain": "하마 설명", "img": "image/mbti/isfj.png" },
+            "ISTP": { "title": "침착한 반항아 한성냥이", "subtitle" : "굳이? 일단은 누워 있을래",  "explain": "하마 설명", "img": "image/mbti/istppng" },
+            "ISTJ": { "title": "사실은 있는..! 상찌", "subtitle" : "피도 눈물도",  "explain": "하마 설명", "img": "image/mbti/istj.png" },
+            "INFP": { "title": "상처가득 쿠크다스 상찌", "subtitle" : "상상부기가 상추를 먹었어..!",  "explain": "하마 설명", "img": "image/mbti/infp.jpg" },
+            "INFJ": { "title": "외유내강 상찌", "subtitle" : "건드리면 물거다...",  "explain": "하마 설명", "img": "image/mbti/infj.png" },
+            "INTP": { "title": "중립기어 두는 한성냥이", "subtitle" : "\"그럴 수 있지\" X 100",  "explain": "하마 설명", "img": "image/mbti/intp.png" },
+            "INTJ": { "title": "무표정의 츤데레 한성냥이", "subtitle" : "알고보면 한없이 따뜻해요",  "explain": "하마 설명", "img": "image/mbti/intj.png" }
+        }
+
+
+        function init(){
+            $(".start").show();
+            $(".question").hide();
+            $(".copyright").hide();
+        }
+
+        function start() {
+            $(".start").hide(); //클릭시 사라지게 
+            $(".question").show(); //문제 화면을 보여주고
+            $(".copyright").hide();
+            next(); //바로 다음 문제로
+        }
+        $("#A").click(function () { //id = "A"인 버튼 클릭하면
+            var type = $("#type").val(); //EI
+            var preValue = $("#" + type).val(); // type = EI 를 가지고와서 id가 EI인 값을 preValue에 저장
+            $("#" + type).val(parseInt(preValue) + 1); //type = EI 를 가지고와서 id가 EI인 값을 정수형으로 바꾼 preValue +1
+            next(); //A를 클릭하면 다음 문제로 
+        });
+        $("#B").click(function () { //id = "B"인 버튼 클릭하면
+            next(); //점수 증가는 A만이니 next만. 
+        });
+
+        function next() {
+            if (num == 20) {//마지막 문제까지 다 풀고 나서
+                $(".question").hide();
+                $(".result").show();
+
+                var mbti = "";
+                ($("#EI").val() < 2) ? mbti += "I" : mbti += "E";
+                // if($("#EI").val()<2){
+                //     mbti = mbti + "I"
+                // }else{
+                //     mbti = mbti + "E"
+                // }
+                ($("#SN").val() < 2) ? mbti += "N" : mbti += "S";
+                ($("#TF").val() < 2) ? mbti += "F" : mbti += "T";
+                ($("#JP").val() < 2) ? mbti += "P" : mbti += "J";
+                alert(mbti);
+
+                $("#image-mbti-result").attr("src", result[mbti]["img"]);
+                $("#title").html(result[mbti]["title"]);
+                $("#explain").html(result[mbti]["explain"]);
+
+            }
+            else {
+                var random = Math.floor(Math.random() * (index.length - 1) + 1);
+                $("#myBar").attr('style', 'width: calc(100/20*'+num+'%)');
+                $('.progress-bar-image').attr('style', 'margin: 0px 0% 0px calc(100/20 *' + num + '%)')
+                $(".progress-number").html(num +"/20");
+                $(".problem").html(q[index[random]]["title"]); //문제 1번, 2번 3번 ...
+                $("#type").val(q[index[random]]["type"]); // EI EI EI SN SN SN TF TF TF ...
+                $("#A").html(q[index[random]]["A"]);
+                $("#B").html(q[index[random]]["B"]);
+                index.splice(random, 1);
+                num++;
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>
